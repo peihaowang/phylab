@@ -1,0 +1,6 @@
+
+2017/11/10
+Add implement of max, min for class _CDataAnalysis
+Use formula calculate chauvenet coefficient
+Calculate t(P) to determine the Error A
+Provide an enum of measuring tool, which can be used to indicate precision to determine the Error B
