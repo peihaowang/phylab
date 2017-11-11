@@ -35,7 +35,7 @@ class _CArgs:
 	def param(self, key, default):
 		return self.m_args[key] if self.has_param(key) else default
 
-class _CDataAnalysis:
+class DataAnalysis:
 
 	def __init__(self, data):
 		self.m_data = data
@@ -72,7 +72,7 @@ class _CDataAnalysis:
 
 	def geometric_mean(self):
 		result = None
-		if len(self.m_data) > 0 and self.check_data(_CDataAnalysis.checker_positive):
+		if len(self.m_data) > 0 and self.check_data(DataAnalysis.checker_positive):
 			product = 1.0
 			for num in self.m_data:
 				product *= num
@@ -81,7 +81,7 @@ class _CDataAnalysis:
 
 	def harmonic_mean(self):
 		result = None
-		if len(self.m_data) > 0 and self.check_data(_CDataAnalysis.checker_nonzero):
+		if len(self.m_data) > 0 and self.check_data(DataAnalysis.checker_nonzero):
 			sum = 0.0
 			for num in self.m_data:
 				sum += (1 / num)
@@ -140,7 +140,7 @@ class _CDataAnalysis:
 			noWinkled = True
 			stddevs = self.std_dev_sample()
 			mean = self.arithmetic_mean()
-			c = 3 #if criterion == _CDataAnalysis.PAUTA_CRITERION else _CDataAnalysis.CHAUVENET_COEFFICIENT[len(self.m_data)]
+			c = 3 #if criterion == DataAnalysis.PAUTA_CRITERION else DataAnalysis.CHAUVENET_COEFFICIENT[len(self.m_data)]
 
 			reserve = []
 			winkled = []
@@ -162,7 +162,7 @@ if __name__ == '__main__':
 	command = args.command()
 	if command == 'winklegrosserror':
 		#2017.11.2 Decide to use which algorithm. -p for Pauta criterion, -c for Chauvenet criterion(default)
-		criterion = _CDataAnalysis.PAUTA_CRITERION if args.has_param('-p') else _CDataAnalysis.CHAUVENET_CRITERION
+		criterion = DataAnalysis.PAUTA_CRITERION if args.has_param('-p') else DataAnalysis.CHAUVENET_CRITERION
 		data = [float(number) for number in sys.stdin.read().split()]
 
 		def callbackStep(times, mean, stddevs, winkled, reserve):
@@ -171,14 +171,14 @@ if __name__ == '__main__':
 			print("winkled = %s" % ' '.join([str(num) for num in winkled]))
 			print("result = %s" % ' '.join([str(num) for num in reserve]))
 
-		analyze = _CDataAnalysis(data)
+		analyze = DataAnalysis(data)
 		analyze.winkleGrossError(criterion, callbackStep)
 		print("-----Final-----")
 		print("mean = %f, stddevs = %f" % (analyze.arithmetic_mean(), analyze.std_dev_sample()))
 		print("result = %s" % ' '.join([str(num) for num in analyze.data()]))
 	elif command == 'uncertainty':
 		data = [float(number) for number in sys.stdin.read().split()]
-		analyze = _CDataAnalysis(data)
+		analyze = DataAnalysis(data)
 
 		mean = analyze.arithmetic_mean()
 		stddevs = analyze.std_dev_sample()

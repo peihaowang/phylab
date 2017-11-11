@@ -7,7 +7,7 @@ phylab provides a set of utilities and interfaces to process laboratory data.
 ## On terminal
 
 ### 1. Use phylab.py
-Use *python3* to interpret phylab.py, and specific the command and parameters, like this:
+Use *python3* to interpret phylab.py, and specify the command and parameters, like this:
 ```
 $ python3 phylab.py <command> <parameters>
 ```
@@ -34,7 +34,7 @@ Phylab can retrieve the raw data from the complex output in this way.
 Absolutely, you can take advantage of DTCF to attach some extra information alongside your raw data.
 
 ### 2. Use phylab.pyc
-Simply run phylab.pyc and specific the command and parameters. All details are the same as above.
+Simply run phylab.pyc and specify the command and parameters. All details are the same as above.
 
 ## On graphical user interface
 
@@ -58,4 +58,4 @@ At present, phylab standard library only provides python interface, you may use 
 from Phylab.Core import CDataAnalysis
 ```
 
-*Note: phylab is an unfinished project, any statements above are only plans*
+**Note: phylab is an unfinished project, any statements above are only plans**
